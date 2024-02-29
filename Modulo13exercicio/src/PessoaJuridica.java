@@ -30,4 +30,18 @@ public class PessoaJuridica {
     {
         this.idade = idade;
     }
+
+
+    public PessoaJuridica() {
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.idade = idade;
+    }
+
+    public String getCnpj() {
+        return null;
+    }
+
+    public void setCnpj(String cnpj) {
+    }
 }

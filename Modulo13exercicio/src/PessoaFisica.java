@@ -34,6 +34,9 @@ public class PessoaFisica {
         this.idade = idade;
     }
 
-
-
+    public PessoaFisica() {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.idade = idade;
+    }
 }

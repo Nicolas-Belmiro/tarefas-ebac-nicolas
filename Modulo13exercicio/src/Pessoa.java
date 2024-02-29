@@ -1,30 +1,100 @@
 import java.util.logging.LogManager;
 
-public class
+public class Main {
+
     public static void main(String[] args) {
-        PessoaFisica pessoaFisica = criarPessoaFisica(cpf:12314 idade:25 nome:Nicolas )
-        PessoaJuridica pessoaJuridica = criarPessoaFisica(cnpj:12314 idade:25 nome:Macio )
-        System.out.println("Hello and welcome!");
+        PessoaFisica pessoaFisica = criarPessoaFisica("Nicolas", String.valueOf(12314L), 25L);
+        PessoaJuridica pessoaJuridica = criarPessoaJuridica("Macio", String.valueOf(12314L), 25L);
 
+        System.out.println("Pessoa física:");
+        System.out.println("Nome: " + pessoaFisica.getNome());
+        System.out.println("CPF: " + pessoaFisica.getCpf());
+        System.out.println("Idade: " + pessoaFisica.getIdade());
 
+        System.out.println("\nPessoa jurídica:");
+        System.out.println("Nome: " + pessoaJuridica.getNome());
+        System.out.println("CNPJ: " + pessoaJuridica.getCnpj());
+        System.out.println("Idade: " + pessoaJuridica.getIdade());
     }
 
-    private static PessoaFisica criarPessoaFisica(String nome Long cpf Long idade){
-
+    private static PessoaFisica criarPessoaFisica(String nome, String cpf, Long idade) {
         PessoaFisica pessoaFisica = new PessoaFisica();
-        pessoaFisica.setCpf(cpf);
         pessoaFisica.setNome(nome);
+        pessoaFisica.setCpf(Long.valueOf(cpf));
         pessoaFisica.setIdade(idade);
         return pessoaFisica;
     }
 
-    private static PessoaJuridica criarJuridicasica(String nome Long cpf Long idade){
-
+    private static PessoaJuridica criarPessoaJuridica(String nome, String cnpj, Long idade) {
         PessoaJuridica pessoaJuridica = new PessoaJuridica();
-        pessoaJuridica.setCnpj(cnpj);
         pessoaJuridica.setNome(nome);
-         pessoaJuridica.setIdade(idade);
-        return PessoaJuridica;
-   }
+        pessoaJuridica.setCnpj(cnpj);
+        pessoaJuridica.setIdade(idade);
+        return pessoaJuridica;
+    }
+}
 
+class pessoaFisica {
 
+    private String nome;
+
+    private String cpf;
+
+    private Long idade;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public Long getIdade() {
+        return idade;
+    }
+
+    public void setIdade(Long idade) {
+        this.idade = idade;
+    }
+
+}
+
+class pessoaJuridica {
+
+    private String nome;
+
+    private String cnpj;
+
+    private Long idade;
+
+    public String getNome() {
+
+        return null;
+    }
+
+    public void setNome(String nome) {
+    }
+
+    public String getCnpj() {
+        return null;
+    }
+
+    public void setCnpj(String cnpj) {
+    }
+
+    public String getIdade() {
+        return null;
+    }
+
+    public void setIdade(Long idade) {
+    }
+}
