@@ -1,29 +1,37 @@
-import jakarta.persistence.*;
+import javax.persistence.*;
 import java.time.Instant;
+
+
+/**
+ * @author Nicolas
+ *
+ */
 @Entity
 @Table(name = "TB_MATRICULA")
 public class Matricula {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "matri_seq")
-    @SequenceGenerator(name = "matri_seq", sequenceName = "sq_matricula", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="matri_seq")
+    @SequenceGenerator(name="matri_seq", sequenceName="sq_matricula", initialValue = 1, allocationSize = 1)
     private Long id;
 
     @Column(name = "CODIGO", length = 10, nullable = false, unique = true)
     private String codigo;
 
-
-// nao sei qual import fazer deveria ser esse import java.time.Instant; so que nao o acho
-
-
     @Column(name = "DATA_MATRICULA", nullable = false)
     private Instant dataMatricula;
 
-    @Column(name = "VALOR", nullable = false)
+    @Column(name = "valor", nullable = false)
     private Double valor;
 
-    @Column(name = "STATUS", nullable = false)
+    @Column(name = "status", nullable = false)
     private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "id_curso_fk",
+            foreignKey = @ForeignKey(name = "fk_curso_matricula"),
+            referencedColumnName = "id", nullable = false)
+    private Curso curso;
 
     public Long getId() {
         return id;
@@ -64,4 +72,14 @@ public class Matricula {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+
+
 }

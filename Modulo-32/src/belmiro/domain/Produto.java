@@ -1,25 +1,40 @@
-import jakarta.persistence.*;
+import org.hibernate.annotations.Check;
+
+import javax.persistence.*;
+
 
 @Entity
-@Table(name = "TB_PRODUTO")
+@Table(name = "TB_PRODUTO_APOSTILA")
 public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "produto_seq")
-    @SequenceGenerator(name = "produto_seq", sequenceName = "sq_produto", initialValue = 1, allocationSize = 1)
+    @SequenceGenerator(name = "produto_seq", sequenceName = "produto_seq", initialValue = 1, allocationSize = 1)
     private Long id;
 
-    @Column(name = "CODIGO", length = 10, nullable = false, unique = true)
+    @Column(name = "CODIGO", length = 5, nullable = false, unique = true)
     private String codigo;
 
-    @Column(name = "NOME", length = 50, nullable = false)
-    private String nome;
+    @Column(name = "DESCRICAO", length = 100, nullable = true)
+    private String descricao;
 
-    @Column(name = "DESCRICAO", length = 100, nullable = false)
-    private String descrcao;
 
-    @Column(name = "VALOR", nullable = false)
-    private Double valor;
+    @Column(name = "Digital_Fisica", length = 50, nullable = false)
+    @Check(constraints = "Digital_Fisica = 'Digital' or Digital_Fisica = 'Fisica'")
+    private String digitalFisica;
+
+    @ManyToOne
+    @JoinColumn(name = "id_curso_fk",
+            foreignKey = @ForeignKey(name = "fk_curso_produto_apostila"),
+            referencedColumnName = "id", nullable = false)
+    private Curso curso;
+
+    @ManyToOne
+    @JoinColumn(name = "id_matricula_fk",
+            foreignKey = @ForeignKey(name = "fk_matricula_produto_apostila"),
+            referencedColumnName = "id", nullable = false)
+    private Matricula matricula;
+
 
     public Long getId() {
         return id;
@@ -37,27 +52,35 @@ public class Produto {
         this.codigo = codigo;
     }
 
-    public String getNome() {
-        return nome;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public String getDescrcao() {
-        return descrcao;
+    public Curso getCurso() {
+        return curso;
     }
 
-    public void setDescrcao(String descrcao) {
-        this.descrcao = descrcao;
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 
-    public Double getValor() {
-        return valor;
+    public String getDigitalFisica() {
+        return digitalFisica;
     }
 
-    public void setValor(Double valor) {
-        this.valor = valor;
+    public void setDigitalFisica(String digitalFisica) {
+        this.digitalFisica = digitalFisica;
+    }
+
+    public Matricula getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(Matricula matricula) {
+        this.matricula = matricula;
     }
 }
